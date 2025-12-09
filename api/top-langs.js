@@ -17,8 +17,16 @@ import { renderError } from "../src/common/render.js";
 import { fetchTopLanguages } from "../src/fetchers/top-languages.js";
 import { isLocaleAvailable } from "../src/translations.js";
 
+const allowedUsers = ["rueyday"];
+
 // @ts-ignore
 export default async (req, res) => {
+  const user = req.query.username;
+
+  if (!allowedUsers.includes(user)) {
+    return res.status(403).json({ error: "Unauthorized user" });
+  }
+  
   const {
     username,
     hide,
