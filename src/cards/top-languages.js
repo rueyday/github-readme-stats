@@ -283,7 +283,7 @@ const createCompactLangNode = ({
 
   return `
     <g class="stagger" style="animation-delay: ${staggerDelay}ms">
-      <circle cx="5" cy="6" r="5" fill="${color}" />
+      <rect class="lang-diamond" style="animation-delay: ${staggerDelay}ms" x="0.5" y="1.5" width="9" height="9" fill="${color}" />
       <text data-testid="lang-name" x="15" y="10" class='lang-name'>
         ${lang.name} ${hideProgress ? "" : displayValue}
       </text>
@@ -930,6 +930,20 @@ const renderTopLanguages = (topLangs, options = {}) => {
     }
     .lang-progress{
       animation: growWidthAnimation 0.6s ease-in-out forwards;
+    }
+    @keyframes diamondRotateIn {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(45deg);
+      }
+    }
+    .lang-diamond {
+      transform-box: fill-box;
+      transform-origin: center;
+      transform: rotate(45deg);
+      animation: diamondRotateIn 0.4s ease-in-out forwards;
     }
     `,
   );
